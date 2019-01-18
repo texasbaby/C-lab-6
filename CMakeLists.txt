@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
-set(PROJECT_NAME task3) 
+set(PROJECT_NAME task6) 
 project(${PROJECT_NAME})
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
@@ -18,18 +18,25 @@ file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 
 set(SRC_FILES1 ${PROJECT_SOURCE_DIR}/src/task1.cpp)
+set(SRC_FILES2 ${PROJECT_SOURCE_DIR}/src/task2.cpp)
 set(SRC_FILES3 ${PROJECT_SOURCE_DIR}/src/task3.cpp)              
 set(SRC_FILES4 ${PROJECT_SOURCE_DIR}/src/task4.cpp)
 set(SRC_FILES5 ${PROJECT_SOURCE_DIR}/src/task5.cpp)
 set(SRC_FILES6 ${PROJECT_SOURCE_DIR}/src/task6.cpp)
+set(SRC_FILES7 ${PROJECT_SOURCE_DIR}/src/task7.cpp)
+set(SRC_FILES8 ${PROJECT_SOURCE_DIR}/src/task8.cpp)
+
 
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(task1_lib ${SRC_FILES1})
+add_library(task2_lib ${SRC_FILES2})
 add_library(task3_lib ${SRC_FILES3})
 add_library(task4_lib ${SRC_FILES4})
 add_library(task5_lib ${SRC_FILES5})
 add_library(task6_lib ${SRC_FILES6})
+add_library(task7_lib ${SRC_FILES7})
+add_library(task8_lib ${SRC_FILES8})
 
 add_executable(task1 ${PROJECT_SOURCE_DIR}/src/main1.cpp)
 add_executable(task2 ${PROJECT_SOURCE_DIR}/src/main2.cpp)
@@ -38,13 +45,17 @@ add_executable(task4 ${PROJECT_SOURCE_DIR}/src/main4.cpp)
 add_executable(task5 ${PROJECT_SOURCE_DIR}/src/main5.cpp)
 add_executable(task6 ${PROJECT_SOURCE_DIR}/src/main6.cpp)
 add_executable(task7 ${PROJECT_SOURCE_DIR}/src/main7.cpp)
+add_executable(task8 ${PROJECT_SOURCE_DIR}/src/main8.cpp)
 
 
 target_link_libraries(task1 task1_lib)
+target_link_libraries(task2 task2_lib)
 target_link_libraries(task3 task3_lib)
 target_link_libraries(task4 task4_lib)
 target_link_libraries(task5 task5_lib)
 target_link_libraries(task6 task6_lib)
+target_link_libraries(task7 task7_lib)
+target_link_libraries(task8 task8_lib)
 
 ################################
 # Testing
