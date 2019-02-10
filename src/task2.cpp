@@ -15,7 +15,7 @@ unsigned int seqCollatz(unsigned int *maxlen)
 		if (*maxlen < currLen)
 		{
 			*maxlen = currLen;
-			maxNum = i;
+			maxNum = (unsigned int) i;
 		}
 	}
 
