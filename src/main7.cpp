@@ -11,6 +11,7 @@ int shortestTurn;
 int turn;
 bool success;
 int n, m;
+clock_t start, stop;
 
 void place(int x, int y)
 {
@@ -26,7 +27,8 @@ void place(int x, int y)
 		if (turn < shortestTurn)
 		{
 			shortestTurn = turn;
-			printf("%d %f\n", turn,clock()/ CLK_TCK);
+			stop = clock();
+			//printf("%d %f\n", turn, (float) (stop - start)/CLOCKS_PER_SEC);
 			strcpy(shortestWay, way);
 		}
 		return;
@@ -60,6 +62,7 @@ void place(int x, int y)
 
 int main()
 {
+	start = clock();
 	FILE *fp;
 	char filename[] = "mazy.txt";
 	int j;
@@ -78,7 +81,7 @@ int main()
 	for (i = 0; i < n; i++)
 		for (j = 0; j < m; j++)
 			visited[i][j] = false;
-	int x0 = 1, y0 = 17;
+	int x0 = 4, y0 = 23;
 	place(x0, y0);
 	way[turn] = '\0';
 	mazy[x0][y0] = 'x';
