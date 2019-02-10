@@ -6,10 +6,11 @@
 unsigned int seqCollatz(unsigned int *maxlen)
 {
 	*maxlen = 0;
-	unsigned int currLen = 0, maxNum = 0, i = 0;
+	unsigned int currLen = 0, maxNum = 0;
+	unsigned long long i = 0;
 	for (i = 2; i <= 1000000; i++)
 	{
-		currLen = collatz((unsigned long long)i);
+		currLen = collatz(i);
 		//putchar('\n');
 		if (*maxlen < currLen)
 		{
