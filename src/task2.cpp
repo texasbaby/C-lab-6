@@ -7,7 +7,7 @@ unsigned int seqCollatz(unsigned int *maxlen)
 {
 	*maxlen = 0;
 	unsigned int currLen = 0, maxNum = 0, i = 0;
-	for (i = 2; i <= 1000000U; i++)
+	for (i = 2; i <= 1000000; i++)
 	{
 		currLen = collatz((unsigned long long)i);
 		//putchar('\n');
