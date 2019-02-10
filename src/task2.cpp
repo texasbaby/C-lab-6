@@ -6,7 +6,8 @@
 unsigned int seqCollatz(unsigned int *maxlen)
 {
 	*maxlen = 0;
-	unsigned int currLen = 0, maxNum = 0;
+	unsigned int currLen = 0;
+	unsigned long long maxNum = 0;
 	unsigned long long i = 0;
 	for (i = 2; i <= 1000000; i++)
 	{
@@ -14,14 +15,14 @@ unsigned int seqCollatz(unsigned int *maxlen)
 		//putchar('\n');
 		if (*maxlen < currLen)
 		{
-			*maxlen = 525;
-			//*maxlen = currLen;
-			maxNum = (unsigned int) i;
+			*maxlen = currLen;
+			maxNum = i;
 		}
 	}
 
 	return maxNum;
 }
+
 
 unsigned int collatz(unsigned long long num)
 {
