@@ -12,9 +12,9 @@ unsigned int seqCollatz(unsigned int *maxlen)
 	{
 		currLen = collatz(i);
 		//putchar('\n');
-		if (*maxlen < currLen)
+		if (maxlen < currLen)
 		{
-			*maxlen = currLen;
+			maxlen = currLen;
 			maxNum = (unsigned int) i;
 		}
 	}
