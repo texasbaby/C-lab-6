@@ -7,7 +7,7 @@ unsigned int seqCollatz(unsigned int *maxlen)
 {
 	*maxlen = 0;
 	unsigned int currLen = 0;
-	unsigned long long maxNum = 0;
+	unsigned int maxNum = 0;
 	unsigned long long i = 0;
 	for (i = 2; i <= 1000000; i++)
 	{
@@ -19,27 +19,15 @@ unsigned int seqCollatz(unsigned int *maxlen)
 			maxNum = i;
 		}
 	}
-
 	return maxNum;
 }
 
-
 unsigned int collatz(unsigned long long num)
 {
-	static unsigned int countLen = 0;
-	countLen++;
-	//printf("%llu ", num);
-	if (num == (unsigned long long)(1))
-	{
-		unsigned int tmpCount = countLen;
-		countLen = 0;
-		return tmpCount;
-	}
+	if (num == 1)
+		return 1;
+	if (num % 2 == 0)
+		return collatz(num / 2) + 1;
 	else
-	{
-		if (num % (unsigned long long)(2))
-			collatz((unsigned long long)(3)*num + (unsigned long long)(1));
-		else
-			collatz(num / (unsigned long long)(2));
-	}
+		return collatz(3 * num + 1) + 1;
 }
