@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include "task5.h"
-#define MAXNUM 40
+#define MAXNUM 23
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
 		return -1;
 	}
 
-	for (int i = 0; i < MAXNUM; i++)
+	for (int i = 1; i < MAXNUM; i++)
 	{
 		begin = clock();
 		fibNumber = fib1(i);
