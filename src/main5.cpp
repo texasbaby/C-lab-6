@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include "task5.h"
-#define MAXNUM 23
+#define MAXNUM 41
 
 int main()
 {
