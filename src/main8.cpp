@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	char *buf = argv[1];
 	//char buf [] = "(((7-1)/(4+2))-9)";
-	printf("%d", eval(buf+1));
+	printf("%d", eval(buf));
 
 	getchar();
 	return 0;
