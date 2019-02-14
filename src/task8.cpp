@@ -1,17 +1,18 @@
 int eval(char *buf)
 {
+	buf++;
 	char *p = buf;
 	int n1 = 0, n2 = 0, state = 0, sum = 0;
 	while (*buf != '\0')
 	{
 		if (*buf == '(' && state == 0)
-			*buf = ' ', n1 = eval(buf + 1);
+			*buf = ' ', n1 = eval(buf);
 		if ((*buf >= '0' && *buf <= '9') && state == 0)
 			n1 = n1 * 10 + (*buf - 48), *buf = ' ';
 		if (*buf == '*' || *buf == '/' || *buf == '+' || *buf == '-')
 			p = buf, state = 1;
 		if (*buf == '(' && state == 1)
-			*buf = ' ', n2 = eval(buf + 1);
+			*buf = ' ', n2 = eval(buf);
 		if ((*buf >= '0' && *buf <= '9') && state == 1)
 			n2 = n2 * 10 + (*buf - 48), *buf = ' ';
 		if (state == 0 && *buf == ')')
