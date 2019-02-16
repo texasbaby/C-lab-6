@@ -6,8 +6,7 @@ int eval(char *buf)
 	char expr1[M];
 	char expr2[M];
 	char operation;
-	//int result = 0;
-
+	
 	if (buf[0] >= '0' && buf[0] <='9')
 		return atoi(buf);
 	else
@@ -15,17 +14,17 @@ int eval(char *buf)
 		operation = partition(buf, expr1, expr2);
 		switch (operation)
 		{
-		case '+': return eval(expr1) + eval(expr2);
-			//break;
-		case '-': return eval(expr1) - eval(expr2);
-			//break;
-		case '*': return eval(expr1) * eval(expr2);
-			//break;
-		case '/': return eval(expr1) / eval(expr2);
-			//break;
+		case '+': 
+			return eval(expr1) + eval(expr2);	
+		case '-':
+			return eval(expr1) - eval(expr2);	
+		case '*': 
+			return eval(expr1) * eval(expr2);		
+		case '/':
+			return eval(expr1) / eval(expr2);
+			
 		}
 
-		//return result;
 	}
 
 }
@@ -51,7 +50,7 @@ char partition(char *buf, char *expr1, char *expr2)
 	}
 	expr1[j] = '\0';
 
-	for (j = 0, q = i + 1; buf[q] != '\0'; j++, q++)
+	for (j = 0, q = i + 1; buf[q+1] != '\0'; j++, q++)
 		expr2[j] = buf[q];
 	expr2[j] = '\0';
 
