@@ -1,5 +1,5 @@
 
-int count = 0;
+static int count = 0;
 char* int2str(char *buf, unsigned int value)
 {
 	int count1 = count;
