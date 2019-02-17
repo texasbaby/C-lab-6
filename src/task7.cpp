@@ -1,4 +1,4 @@
-#include "task7.1.h"
+#include "task7.h"
 void place(char lab[M][N], int x, int y)
 {
 	if (x <= 0 || x >= 5 || y <= 0 || y >= 7)
