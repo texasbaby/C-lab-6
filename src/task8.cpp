@@ -1,32 +1,6 @@
 #include <stdlib.h>
 #define N 20
 
-int eval(char *buf) // function which calculate the string in buf
-{
-	char expr1[N] = { 0 };
-	char expr2[N] = { 0 };
-	
-	char op = 0;
-	
-	if (*buf!='(')
-		return atoi(buf);
-	else
-	{
-		op = partition(buf, expr1, expr2);
-		switch (op)
-		{
-		case '+':
-			return eval(expr1) + eval(expr2);
-		case '-':
-			return eval(expr1) - eval(expr2);
-		case '*':
-			return eval(expr1) * eval(expr2);
-		case '/':
-			return eval(expr1) / eval(expr2);
-		}
-	}
-}
-
 char partition(char *buf, char *expr1, char *expr2) // function which breaks the expression into 3 parts
 {
 	int open = 0, close = 0;
@@ -53,3 +27,30 @@ char partition(char *buf, char *expr1, char *expr2) // function which breaks the
 
 	return buf[i];
 }
+
+int eval(char *buf) // function which calculate the string in buf
+{
+	char expr1[N] = { 0 };
+	char expr2[N] = { 0 };
+	
+	char op = 0;
+	
+	if (*buf!='(')
+		return atoi(buf);
+	else
+	{
+		op = partition(buf, expr1, expr2);
+		switch (op)
+		{
+		case '+':
+			return eval(expr1) + eval(expr2);
+		case '-':
+			return eval(expr1) - eval(expr2);
+		case '*':
+			return eval(expr1) * eval(expr2);
+		case '/':
+			return eval(expr1) / eval(expr2);
+		}
+	}
+}
+
