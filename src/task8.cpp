@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "task8.h"
+#define N 20
 
 int eval(char *buf) // function which calculate the string in buf
 {
