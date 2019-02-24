@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#define N 20
+#define M 20
 
 char partition(char *buf, char *expr1, char *expr2) // function which breaks the expression into 3 parts
 {
@@ -30,8 +30,8 @@ char partition(char *buf, char *expr1, char *expr2) // function which breaks the
 
 int eval(char *buf) // function which calculate the string in buf
 {
-	char expr1[N] = { 0 };
-	char expr2[N] = { 0 };
+	char expr1[M] = { 0 };
+	char expr2[M] = { 0 };
 	
 	char op = 0;
 	
