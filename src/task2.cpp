@@ -1,8 +1,25 @@
+unsigned int collatz(unsigned long long num)
+{
+	if (num == 1)//basic task
+	{
+		return 1;
+	}
+	if (num % 2 != 0)
+	{
+		return collatz(num * 3 + 1) + 1;
+	}
+
+	else if (num % 2 == 0)
+	{
+		return collatz(num / 2) + 1;
+	}
+}
+
 unsigned int seqCollatz(unsigned int *maxlen)
 //func, returning number and entering maximum length to maxlen
 {
-	unsigned long long res = 0;
-	for (unsigned long long num = 2; num <= 1000000; num++)
+	unsigned int res = 0;
+	for (unsigned int num = 2; num <= 1000000; num++)
 	{
 		unsigned int currentLen = collatz(num);
 		if (currentLen > *maxlen)
@@ -15,22 +32,7 @@ unsigned int seqCollatz(unsigned int *maxlen)
 }
 
 //func, returning the lenght of Collatz seq. for a number
-unsigned int collatz(unsigned long long num)
-{
-	if (num == 1)//basic task
-	{
-		return 1;
-	}
-	if (num % 2 != 0)
-	{
-		return collatz(num * 3 + 1) + 1;
-	}
-		
-	else if (num % 2 == 0)
-	{
-		return collatz(num / 2) + 1;
-	}		
-}
+
 
 /*unsigned int collatz(unsigned long long num) //the same without recursion
 {
