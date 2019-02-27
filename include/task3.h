@@ -1,5 +1,5 @@
-#ifndef TASK2_H
-#define TASK2_H
+#ifndef TASK3_H
+#define TASK3_H
 
 #define SIZE 256
 
