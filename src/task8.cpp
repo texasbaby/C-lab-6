@@ -1,31 +1,7 @@
-#include "task8.h"
 #include <string.h>
 #include <stdlib.h>
 #define SIZE 50
-int eval(char *buf) 
-{
-	int len = strlen(buf);	
-	if (*buf != '(')		//if there is only one number in buf
-		return atoi(buf);
-//if we met brace
-	char expr1[SIZE] = { 0 }; 
-	char expr2[SIZE] = { 0 };
-	char sign = partition(buf, expr1, expr2);
-	int res = 0;
-	switch (sign)
-	{
-	case '+': res = eval(expr1) + eval(expr2);
-		break;
-	case '-': res = eval(expr1) - eval(expr2);
-		break;
-	case '*': res = eval(expr1) * eval(expr2);
-		break;
-	case '/': res = eval(expr1) / eval(expr2);
-		break;
-	}
-
-	return res;
-}
+#include "task8.h"
 
 int isSign(char letter) // auxiliary function for partition
 {
@@ -34,7 +10,6 @@ int isSign(char letter) // auxiliary function for partition
 	else
 		return 0;
 }
-
 
 char partition(char *buf, char *expr1, char *expr2)
 {
@@ -62,9 +37,33 @@ char partition(char *buf, char *expr1, char *expr2)
 	{
 		expr1[j] = buf[i];
 	}
-	for (int i = startExpr2, j = 0; i < len-1; i++, j++)
+	for (int i = startExpr2, j = 0; i < len - 1; i++, j++)
 	{
 		expr2[j] = buf[i];
 	}
 	return res;
+}
+
+
+int eval(char *buf)
+{
+	if (*buf != '(')
+		return atoi(buf);//if there is only one number in buf
+//if we met brace
+	char expr1[SIZE] = { 0 };
+	char expr2[SIZE] = { 0 };
+	char sign = partition(buf, expr1, expr2);
+	int res = 0;
+	switch (sign)
+	{
+	case '-': res = eval(expr1) - eval(expr2);
+		break;
+	case '+': res = eval(expr1) + eval(expr2);
+		break;
+	case '*': res = eval(expr1) * eval(expr2);
+		break;
+	case '/': res = eval(expr1) / eval(expr2);
+		break;
+	}
+	return res;	
 }

@@ -20,10 +20,10 @@ unsigned int collatz(unsigned long long num)
 unsigned int seqCollatz(unsigned int *maxlen)
 //func, returning number and entering maximum length to maxlen
 {
-	unsigned int res = 0;
+	unsigned int res = 0, currentLen = 0;
 	for (unsigned int num = 2; num <= 1000000; num++)
 	{
-		unsigned int currentLen = collatz(num);
+		currentLen = collatz(num);
 		if (currentLen > *maxlen)
 		{
 			*maxlen = currentLen;
