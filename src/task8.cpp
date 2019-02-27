@@ -1,7 +1,6 @@
 #include "task8.h"
 #include <string.h>
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include <stdlib.h>
 #define SIZE 50
 int eval(char *buf) 
 {
@@ -49,7 +48,7 @@ char partition(char *buf, char *expr1, char *expr2)
 			countOpen++;
 		else if (')' == buf[i])
 			countClosed++;
-		else if (isSign(buf[i]) && ((int)abs(countOpen - countClosed) == 1))
+		else if (isSign(buf[i]) && (countOpen - countClosed == 1))
 		{
 			res = buf[i];
 			finishExpr1 = i - 1;
