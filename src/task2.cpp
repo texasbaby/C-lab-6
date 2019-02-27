@@ -1,3 +1,5 @@
+#include "task2.h"
+
 unsigned int collatz(unsigned long long num)
 {
 	if (num == 1)//basic task
