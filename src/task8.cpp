@@ -1,51 +1,55 @@
-int eval(char *buf)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "task8.h"
+
+ char partition(char *buf, char *expr1, char *expr2)
 {
-	buf++;
-	char *p = buf;
-	int n1 = 0, n2 = 0, state = 0, sum = 0;
-	while (*buf != '\0')
+	int openBracket = 0, operationPos = 0;
+	for (int i = 0; buf[i]; i++)
 	{
-		if (*buf == '(' && state == 0)
-			*buf = ' ', n1 = eval(buf);
-		if ((*buf >= '0' && *buf <= '9') && state == 0)
-			n1 = n1 * 10 + (*buf - 48), *buf = ' ';
-		if (*buf == '*' || *buf == '/' || *buf == '+' || *buf == '-')
-			p = buf, state = 1;
-		if (*buf == '(' && state == 1)
-			*buf = ' ', n2 = eval(buf);
-		if ((*buf >= '0' && *buf <= '9') && state == 1)
-			n2 = n2 * 10 + (*buf - 48), *buf = ' ';
-		if (state == 0 && *buf == ')')
+		if (buf[i] == '(')
+			openBracket++;
+		if (buf[i] == ')')
+			openBracket--;
+		if ((buf[i] == '-' || buf[i] == '+' || buf[i] == '*' || buf[i] == '/') && openBracket == 1)
 		{
-			*buf = ' ';
-			return n1;
+			operationPos = i;
+			break;
 		}
-		if (*buf == ')' && *p == '*')
-		{
-			*buf = ' ', *p = ' ';
-			return n1 * n2;
-		}
-		if (*buf == ')' && *p == '/')
-		{
-			*buf = ' ', *p = ' ';
-			return n1 / n2;
-		}
-		if (*buf == ')' && *p == '+')
-		{
-			*buf = ' ', *p = ' ';
-			return n1 + n2;
-		}
-		if (*buf == ')' && *p == '-')
-		{
-			*buf = ' ', *p = ' ';
-			return n1 - n2;
-		}
-		buf++;
 	}
+	int counter = 0;
+	for (int i = 1; i < operationPos; i++)
+		expr1[counter++] = buf[i];
+	expr1[counter] = '\0';
+	counter = 0;
+	for (int i = operationPos+1; buf[i+1]; i++)
+		expr2[counter++] = buf[i];
+	expr2[counter] = '\0';
+	return buf[operationPos];
 }
 
-char partition(char *buf, char *expr1, char *expr2)
+ int eval(char *buf)
 {
-	;
-	return 0;
+	if (*buf != '(')
+		return atoi(buf);
+	else
+	{
+		int result = 0;
+		char expr1[SIZE] = { 0 };
+		char expr2[SIZE] = { 0 };
+		char operSym = partition(buf, expr1, expr2);
+		switch (operSym)
+		{
+		case '-': result = eval(expr1) - eval(expr2);
+			break;
+		case '+': result = eval(expr1) + eval(expr2);
+			break;
+		case '*': result = eval(expr1) * eval(expr2);
+			break;
+		case '/': result = eval(expr1) / eval(expr2);
+			break;
+		}
+		return result;
+	}
 }
