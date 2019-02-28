@@ -6,9 +6,9 @@
 
 int main(int argc, char* argv[])
 {
-	char *buf = argv[1];
+	
 	//char buf [] = "(((7-1)/(4+2))-9)";
-	int res = eval(buf);
+	int res = eval(argv[1]);
 	printf("%d", res);
 
 	getchar();
