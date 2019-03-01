@@ -9,8 +9,13 @@ char partition(char *buf, char *expr1, char *expr2)
 	int i = 1, j = 1;
 	if (buf[i] != '(')
 	{
-		expr1[0] = buf[i];
-		i++;
+		int k = 0;
+		while ( buf[i]>='0' & buf[i] <= '9')
+		{
+			expr1[k] = buf[i];
+			k++;
+			i++;
+		}
 	}
 	else
 	{
@@ -39,30 +44,31 @@ char partition(char *buf, char *expr1, char *expr2)
 	{
 		expr2[j] = buf[i];
 		j++;
-	}		
+	}
 	return sign;
 }
 
 int eval(char *buf)
 {
 	char expr1[50] = { NULL }, expr2[50] = { NULL };
-	if (strlen(buf) == 1)
-		return res=atoi(buf);
+	if (*buf != '(')
+	//if (strlen(buf) == 1)
+		return res = atoi(buf);
 	char operation = partition(buf, expr1, expr2);
-	
+
 	switch (operation)
 	{
 	case '+':
 		res = eval(expr1) + eval(expr2);
 		break;
 	case '-':
-		res= eval(expr1) - eval(expr2);
+		res = eval(expr1) - eval(expr2);
 		break;
 	case '*':
-		res=eval(expr1) * eval(expr2);
+		res = eval(expr1) * eval(expr2);
 		break;
 	case '/':
-		res= eval(expr1) / eval(expr2);
+		res = eval(expr1) / eval(expr2);
 		break;
 	}
 	return res;
