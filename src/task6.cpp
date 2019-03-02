@@ -5,7 +5,7 @@ unsigned long long fib(unsigned long long *N1, unsigned long long *N2, int N)
 	else
 	{
 		unsigned long long N3 = *N1 + *N2;
-		fib(N2, &N3, N - 1);
+		return fib(N2, &N3, N - 1);
 	}
 }
 
