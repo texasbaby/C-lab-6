@@ -11,13 +11,6 @@ int main()
 		scanf("%d", &N);
 	}
 	printf("%d\t%lld\n", N, fib2(N));
-	/* //for checking
-	printf("Number\tFibbonachi\n");
-	for (int i = 1; i <= N; i++)
-	{
-		unsigned long long res = fib2(i);
-		printf("%d\t% lld\n", i, res);
-	}*/
 
 	return 0;
 }

@@ -3,5 +3,6 @@
 #define SIZE 555
 
 unsigned long long fib2(int N);
+typedef unsigned long long ULL;
 
 #endif
