@@ -1,32 +1,34 @@
 #include <stdlib.h>
-#include <ctype.h>
+
 #define M 64
 
 char partition(char *buf, char *expr1, char *expr2) // ф-я, к-я делит строку на операнды и математические операции
 {
-    int left = 0, right = 0;        // левая скобка '(' и правая скобка ')'
-    int i = 0, j = 0, k = 0;
+    int left = 0, pos = 0;        // левая скобка '(' и позиция
+    int i = 0, j = 0;
 
-    while (buf[i])
+    for(i = 0; buf[i]; i++)
     {
         if (buf[i] == '(')
             left++;
         if (buf[i] == ')')
-            right++;
-        if (left == right + 1 && (buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/'))
+            left--;
+        if ((buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/') && left == 1)
+        {
+            pos = i;
             break;
-        i++;
+        }
     }
 
-    for (j = 0, k = 1; k < i; j++, k++)
-        expr1[j] = buf[k];
+    for (i = 1; i < pos; i++)
+        expr1[j++] = buf[i];
     expr1[j] = '\0';
-
-    for (j = 0, k = i + 1; buf[k + 1] != '\0'; j++, k++)
-        expr2[j] = buf[k];
+    j = 0;
+    for (i = pos + 1; buf[i + 1]; i++)
+        expr2[j++] = buf[i];
     expr2[j] = '\0';
 
-    return buf[i];
+    return buf[pos];
 }
 
 int eval(char *buf) // функция, вычисляющая строку, содержащуюся в buf
@@ -36,7 +38,7 @@ int eval(char *buf) // функция, вычисляющая строку, со
     char operand = 0;
     int result = 0;
 
-    if (isdigit(buf[0]))
+    if (*buf != '(')
         return atoi(buf);
     else
     {
@@ -45,12 +47,16 @@ int eval(char *buf) // функция, вычисляющая строку, со
         {
         case '+':
             result = eval(expr1) + eval(expr2);
+            break;
         case '-':
             result = eval(expr1) - eval(expr2);
+            break;
         case '*':
             result = eval(expr1) * eval(expr2);
+            break;
         case '/':
             result = eval(expr1) / eval(expr2);
+            break;
         }
         return result;
     }
