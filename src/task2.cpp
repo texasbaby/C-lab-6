@@ -16,7 +16,7 @@ unsigned int seqCollatz(unsigned int *maxlen)
 //func, returning number and entering maximum length to maxlen
 {
 	unsigned int currentLen = 0;
-	ULL num = 0, res = 0;
+	unsigned int num = 0, res = 0;
 	for (unsigned int num = 2; num <= 1000000; num++)
 	{
 		currentLen = collatz(num);
