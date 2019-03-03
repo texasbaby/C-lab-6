@@ -1,105 +1,57 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
-#include <assert.h>
+#define N 64
 
-int token;          // токены - символы математических операций +-*/()
-int tokenVal;       // токены - цифры
-
-int partition()                                         // разбираем строку на запчасти
+char partition(char *buf, char *expr1, char *expr2) // ф-я, к-я делит строку на операнды и математические операции
 {
-    while(1)
+    int left = 0, right = 0;        // левая скобка '(' и правая скобка ')'
+    int i = 0, j = 0, k = 0;
+
+    while (buf[i])
     {
-        int c = getchar();                              // получить символ из потока ввода
-        if (c == '\n' || strchr("+-*/()\n", c) != 0)    // ищем токен с помощью strchr
-            return token = c;                           // возвращаем символ математической операции или скобки или конец строки
-        if (isspace(c))                                 // если пробел - идём дальше
-            continue;
-        if (isdigit(c))                                 // если симвот - цифра
+        if (buf[i] == '(')
+            left++;
+        if (buf[i] == ')')
+            right++;
+        if (left == right + 1 && (buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/'))
+            break;
+        i++;
+    }
+
+    for (j = 0, k = 1; k < i; j++, k++)
+        expr1[j] = buf[k];
+    expr1[j] = '\0';
+
+    for (j = 0, k = i + 1; buf[k + 1] != '\0'; j++, k++)
+        expr2[j] = buf[k];
+    expr2[j] = '\0';
+
+    return buf[i];
+}
+
+int eval(char *buf) // функция, вычисляющая строку, содержащуюся в buf
+{
+    char expr1[N] = { 0 };
+    char expr2[N] = { 0 };
+    char operand = 0;
+    int result = 0;
+
+    if (isdigit(buf[0]))
+        return atoi(buf);
+    else
+    {
+        operand = partition(buf, expr1, expr2);
+        switch (operand)
         {
-            ungetc(c, stdin);                           // вернуть считанный символ (цифру) в поток ввода
-            scanf("%d", &tokenVal);                     // захватить цифру из потока ввода
-            return token = '\n';                         // дойти до конца строки
+        case '+':
+            result = eval(expr1) + eval(expr2);
+        case '-':
+            result = eval(expr1) - eval(expr2);
+        case '*':
+            result = eval(expr1) * eval(expr2);
+        case '/':
+            result = eval(expr1) / eval(expr2);
         }
-        fprintf(stderr, "Недопустимый символ: %c \n", c);
-        abort();
+        return result;
     }
 }
-
-void skip(int t)                    // защитная функция
-{
-    assert(token == t);             // убеждаемся, что работаем с цифрами, а не с символами
-    partition();
-}
-
-int second();                       // прототип
-int brackets()                      // выражение в скобках - наивысший приоритет
-{
-    if (token == '\n')
-    {
-        int x = tokenVal;
-        skip('\n');
-        return x;
-    }
-    skip('(');
-    int x = second();               // даже если это + или -
-    skip(')');
-    return x;
-}
-
-int first()                         // сначала вычисляются операции * и /, т.к. имеют более высокий приоритет
-{
-    int x = brackets();
-    while(1)
-    {
-        if (token == '*')
-        {
-            skip('*');
-            x *= brackets();
-        }
-        else if (token == '/')
-        {
-            skip('/');
-            x /= brackets();
-        }
-        else return x;
-    }
-}
-
-int second()                        // вычисление + или -
-{
-    int x = first();
-    while(1)
-    {
-        if (token == '+')
-        {
-            skip('+');
-            x += first();
-        }
-        else if (token == '-')
-        {
-            skip('-');
-            x -= first();
-        }
-        else return x;
-    }
-}
-
-int eval()                          // получение результата
-{
-    partition();
-    while (token != EOF)
-    {
-        if (token == '\n')
-        {
-            skip('\n');
-            continue;
-        }
-        printf("%d \n", second());
-    }
-    printf("\n");
-}
-
-
-
