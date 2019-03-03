@@ -1,6 +1,2 @@
-int partition();
-void skip(int t);
-int brackets();
-int first();
-int second();
-int eval();
+int eval(char *buf);
+char partition(char *buf, char *expr1, char *expr2);
