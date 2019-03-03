@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
         printf("Выражение отсутствует\n");
         return 1;
     }
-    else printf("Значение выражения: %s = %d\n", argv[1], eval(argv[1]));
+    else printf("Значение выражения: %d\n", eval(argv[1]));
 
     return 0;
 }
