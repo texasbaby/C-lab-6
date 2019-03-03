@@ -4,36 +4,34 @@
 
 char partition(char *buf, char *expr1, char *expr2)
 {
-	int left = 0, right = 0, i = 1, j = 0, k=0, m = 0;
-	char ch;
-	int len = strlen(buf);
+	int brace = 0, i = 0, j = 0, place = 0;
 
-	buf[len - 1] = '\0';
-
-	while (buf)
+	for ( i = 0; buf[i]; i++)
 	{
 		if (buf[i] == '(')
-			left++;
+			brace++;
 		if (buf[i] == ')')
-			right++;
-		if (left == right)
+			brace--;
+		if ((buf[i] == '-' || buf[i] == '+' || buf[i] == '*' || buf[i] == '/') && brace == 1)
+		{
+			place = i;
 			break;
-		i++;
+		}
 	}
 
-	for (j = 1; j <= i; j++)
-		expr1[j-1] = buf[j];
+	for (i = 1; i <= place; i++)
+		expr1[j++] = buf[i];
 
-	expr1[j-1] = '\0';
+	expr1[j] = '\0';
 
-	ch = buf[i + 1];
+	j = 0;
 
-	for (k = i + 2, m = 0; buf[k] != '\0'; k++)
-		expr2[m++] = buf[k];
+	for (i = place + 1; buf[i+1]; i++)
+		expr2[j++] = buf[i];
 
-	expr2[m] = '\0';
+	expr2[j] = '\0';
 
-	return ch;
+	return buf[place];
 }
 
 int eval(char *buf)
