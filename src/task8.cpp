@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <ctype.h>
-#define N 64
+#define M 64
 
 char partition(char *buf, char *expr1, char *expr2) // ф-я, к-я делит строку на операнды и математические операции
 {
@@ -31,8 +31,8 @@ char partition(char *buf, char *expr1, char *expr2) // ф-я, к-я делит �
 
 int eval(char *buf) // функция, вычисляющая строку, содержащуюся в buf
 {
-    char expr1[N] = { 0 };
-    char expr2[N] = { 0 };
+    char expr1[M] = { 0 };
+    char expr2[M] = { 0 };
     char operand = 0;
     int result = 0;
 
