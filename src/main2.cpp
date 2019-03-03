@@ -6,6 +6,6 @@ int main()
     unsigned int maxlen = 0;
     unsigned long long numX = seqCollatz(&maxlen);
 
-    printf("Максимальную последовательнось Коллатца(%u) даёт число: %u \n", maxlen, numX);
+    printf("Максимальную последовательнось Коллатца(%u) даёт число: %llu \n", maxlen, numX);
     return 0;
 }
