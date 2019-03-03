@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include "task8.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    printf("Введите выражение: \n");
-    eval();
+    if (argc != 2)
+    {
+        printf("Выражение отсутствует\n");
+        return 1;
+    }
+    else printf("Значение выражения: %s = %d\n", argv[1], eval(argv[1]));
+
     return 0;
 }
