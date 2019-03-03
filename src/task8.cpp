@@ -1,63 +1,57 @@
+#include <string.h>
 #include <stdlib.h>
+#define M 256
 
-#define M 64
-
-char partition(char *buf, char *expr1, char *expr2) // ф-я, к-я делит строку на операнды и математические операции
+char partition(char *buf, char *expr1, char *expr2)
 {
-    int left = 0, pos = 0;        // левая скобка '(' и позиция
-    int i = 0, j = 0;
+    int brace = 0, i = 0, j = 0, place = 0;
 
-    for(i = 0; buf[i]; i++)
+    for ( i = 0; buf[i]; i++)
     {
         if (buf[i] == '(')
-            left++;
+            brace++;
         if (buf[i] == ')')
-            left--;
-        if ((buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/') && left == 1)
+            brace--;
+        if ((buf[i] == '-' || buf[i] == '+' || buf[i] == '*' || buf[i] == '/') && brace == 1)
         {
-            pos = i;
+            place = i;
             break;
         }
     }
 
-    for (i = 1; i < pos; i++)
+    for (i = 1; i <= place; i++)
         expr1[j++] = buf[i];
+
     expr1[j] = '\0';
+
     j = 0;
-    for (i = pos + 1; buf[i + 1]; i++)
+
+    for (i = place + 1; buf[i+1]; i++)
         expr2[j++] = buf[i];
+
     expr2[j] = '\0';
 
-    return buf[pos];
+    return buf[place];
 }
 
-int eval(char *buf) // функция, вычисляющая строку, содержащуюся в buf
+int eval(char *buf)
 {
-    char expr1[M] = { 0 };
-    char expr2[M] = { 0 };
-    char operand = 0;
-    int result = 0;
+    char expr1[M], expr2[M], ch;
 
     if (*buf != '(')
         return atoi(buf);
-    else
+
+    ch = partition(buf, expr1, expr2);
+
+    switch (ch)
     {
-        operand = partition(buf, expr1, expr2);
-        switch (operand)
-        {
-        case '+':
-            result = eval(expr1) + eval(expr2);
-            break;
-        case '-':
-            result = eval(expr1) - eval(expr2);
-            break;
-        case '*':
-            result = eval(expr1) * eval(expr2);
-            break;
-        case '/':
-            result = eval(expr1) / eval(expr2);
-            break;
-        }
-        return result;
+    case '+':
+        return eval(expr1) + eval(expr2);
+    case '-':
+        return eval(expr1) - eval(expr2);
+    case '*':
+        return eval(expr1) * eval(expr2);
+    case '/':
+        return eval(expr1) / eval(expr2);
     }
 }
